@@ -57,8 +57,8 @@ export class UserService {
     let jwt = await this.generateJwtTokens({ id: user.id.toString() });
     res.cookie('tact_token', jwt.accessToken, {
       httpOnly: true,
-      secure: false, // Must be false in localhost (no HTTPS)
-      sameSite: 'lax', // or 'none' if still not working
+      secure: true, // Must be false in localhost (no HTTPS)
+      sameSite: 'none', // or 'none' if still not working
       maxAge: 1000 * 60 * 60 * 24 * 7,
       path: '/',
     });
@@ -87,7 +87,7 @@ export class UserService {
   async logoutUser(res): Promise<UserResponse> {
     res.clearCookie('tact_token', {
       httpOnly: true,
-      secure: false, // Should match the same settings as when the cookie was set
+      secure: true, // Should match the same settings as when the cookie was set
       sameSite: 'lax',
       path: '/',
     });
