@@ -84,6 +84,20 @@ export class UserService {
       data: user,
     };
   }
+  async logoutUser(res): Promise<UserResponse> {
+    res.clearCookie('tact_token', {
+      httpOnly: true,
+      secure: false, // Should match the same settings as when the cookie was set
+      sameSite: 'lax',
+      path: '/',
+    });
+
+    return {
+      status: true,
+      message: 'Logout successful',
+      data: null,
+    };
+  }
 
   private async generateJwtTokens(
     payload: IDecodedJwtToken,

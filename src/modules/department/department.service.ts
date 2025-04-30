@@ -79,15 +79,16 @@ export class DepartmentService {
   ): Promise<DepartmentOneResponse> {
     const { id } = deleteDepartmentInput;
 
-    const existingDepartment = await this.departmentRepo.findOneBy({ id });
+    const existingDepartment = await this.departmentRepo.findOne({
+      where: { id },
+      relations: ['subDepartments'], // Load sub-departments
+    });
+
     if (!existingDepartment) {
       throw new NotFoundException('Department not found');
     }
 
-    const deleteResult = await this.departmentRepo.delete(id);
-    if (deleteResult.affected === 0) {
-      throw new NotFoundException('Department not found');
-    }
+    await this.departmentRepo.remove(existingDepartment); // This will cascade delete
 
     return this.createSuccessResponse('Department deleted');
   }

@@ -9,7 +9,7 @@ export class UserPublicData extends PickType(User, [
 ] as const) {}
 
 @ObjectType()
-export class UserResponse extends GqlApiResponse<UserPublicData> {
+export class UserResponse extends GqlApiResponse<UserPublicData | null> {
   @Field(() => UserPublicData, { nullable: true })
-  data: UserPublicData;
+  data: UserPublicData | null;
 }

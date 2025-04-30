@@ -72,7 +72,7 @@ export class DepartmentResolver {
   async loadDepartments(@Args('pagination') paginationInput: PaginationDto) {
     let response =
       await this.departmentService.loadDepartments(paginationInput);
-    console.log(JSON.stringify(response));
+
     return response;
   }
 }

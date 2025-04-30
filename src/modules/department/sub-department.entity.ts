@@ -13,6 +13,9 @@ export class SubDepartment {
   @Field()
   name: string;
 
-  @ManyToOne(() => Department, (department) => department.subDepartments)
+  @ManyToOne(() => Department, (department) => department.subDepartments, {
+    onDelete: 'CASCADE', // This will automatically delete sub-departments when parent is deleted
+  })
+  @Field(() => Department)
   department: Department;
 }

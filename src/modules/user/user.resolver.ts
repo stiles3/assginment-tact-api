@@ -24,6 +24,11 @@ export class UserResolver {
     const { res } = context;
     return await this.userService.loginUser(loginUserInput, res);
   }
+  @Mutation(() => UserResponse)
+  async logoutUser(@Context() context: { res: Response }) {
+    const { res } = context;
+    return await this.userService.logoutUser(res);
+  }
   @Query(() => UserResponse)
   @UseGuards(AuthGuard)
   async getUser(@Context() context): Promise<UserResponse> {
