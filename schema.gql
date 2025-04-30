@@ -1,0 +1,113 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateDepartmentDto {
+  name: String!
+  subDepartments: [CreateSubdepartmentDto!]
+}
+
+input CreateSubDepartmentDto {
+  departmentId: String!
+  name: String!
+}
+
+input CreateSubdepartmentDto {
+  name: String!
+}
+
+input CreateUserInput {
+  password: String!
+  username: String!
+}
+
+input DeleteDepartmentDto {
+  id: ID!
+}
+
+type DepartmentOneData {
+  id: ID!
+  name: String!
+  subDepartments: [SubDepartment!]
+}
+
+type DepartmentOneResponse {
+  data: DepartmentOneData
+  message: String!
+  status: Boolean!
+}
+
+type DepartmentsData {
+  id: ID!
+  name: String!
+  subDepartments: [SubDepartment!]
+}
+
+type DepartmentsResponse {
+  data: DeptData
+  message: String!
+  status: Boolean!
+}
+
+type DeptData {
+  departments: [DepartmentsData!]!
+  meta: PaginatedData!
+}
+
+input LoginUserInput {
+  password: String!
+  username: String!
+}
+
+type Mutation {
+  addSubDepartment(createSubDepartmentInput: CreateSubDepartmentDto!): DepartmentOneResponse!
+  createDepartment(createDepartmentInput: CreateDepartmentDto!): DepartmentOneResponse!
+  createUser(createUserInput: CreateUserInput!): UserResponse!
+  deleteDepartment(deleteDepartmentInput: DeleteDepartmentDto!): DepartmentOneResponse!
+  deleteSubDepartment(deleteDepartmentInput: DeleteDepartmentDto!): DepartmentOneResponse!
+  loginUser(loginUserInput: LoginUserInput!): UserResponse!
+  updateDepartment(updateDepartmentInput: UpdateDepartmentDto!): DepartmentOneResponse!
+  updateSubDepartment(updateSubDepartmentInput: UpdateSubDepartmentDto!): DepartmentOneResponse!
+}
+
+type PaginatedData {
+  limit: Float!
+  page: Float!
+  total: Float!
+}
+
+input PaginationDto {
+  limit: Float!
+  page: Float!
+}
+
+type Query {
+  getUser: UserResponse!
+  loadDepartments(pagination: PaginationDto!): DepartmentsResponse!
+}
+
+type SubDepartment {
+  id: ID!
+  name: String!
+}
+
+input UpdateDepartmentDto {
+  id: ID!
+  name: String
+}
+
+input UpdateSubDepartmentDto {
+  id: ID!
+  name: String
+}
+
+type UserPublicData {
+  id: ID!
+  username: String!
+}
+
+type UserResponse {
+  data: UserPublicData
+  message: String!
+  status: Boolean!
+}
