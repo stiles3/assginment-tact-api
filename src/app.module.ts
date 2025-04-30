@@ -27,11 +27,11 @@ import { Request, Response } from 'express';
       database: 'tact-api',
       entities: [],
       synchronize: true,
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'P@ssw0rd',
+      url: process.env.DATABASE_URL,
       autoLoadEntities: true,
+      ssl: {
+        rejectUnauthorized: false, // This is needed for Render's PostgreSQL
+      },
     }),
     UserModule,
     AuthModule,
